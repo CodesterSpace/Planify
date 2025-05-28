@@ -1,0 +1,27 @@
+<ion-card class="project-card" [ngClass]="{ 'first': isFirst }" [routerLink]="['/', 'project', project?.p_id]">
+  <ion-card-header class="card-header">
+    <div class="card-top-row">
+      <div class="card-date">{{ project?.createdAt | date:'dd/MM/yy HH:mm' }}</div>
+      <ion-icon name="ellipsis-vertical-outline" class="card-menu"></ion-icon>
+    </div>
+    <div class="card-content">
+      <ion-icon name="phone-portrait-outline" class="card-icon"></ion-icon>
+      <div>
+        <div class="card-title">{{abregeTitre(project!.title) }}</div>
+        <div class="card-subtitle">{{ project?.category }}</div>
+      </div>
+    </div>
+  </ion-card-header>
+
+  <ion-card-content class="card-bottom">
+    <div class="progress-text">Progress</div>
+  
+    <ng-container *ngIf="project?.progress as progress">
+      <ion-progress-bar [value]="progress / 100"></ion-progress-bar>
+      <div class="progress-percent">
+        {{ progress }}%
+      </div>
+    </ng-container>
+  </ion-card-content>  
+  
+</ion-card>

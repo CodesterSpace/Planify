@@ -1,0 +1,73 @@
+// Couleurs principales
+$primary-color:  #145494;
+$secondary-color: #e8f0fe;
+$text-color: #333;
+$light-gray: #f7f7f7;
+.custom-fab {
+    position: fixed;
+    bottom: 30px; // ou essaye -5px, -10px pour qu'il entre dans la tab-bar
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  
+    ion-fab-button {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .custom-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: white;
+    --border-top: none;
+    border-top: 1px solid #ccc;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    /* Masque avec trou circulaire au centre */
+    -webkit-mask: radial-gradient(circle 35px at center top, transparent 0, transparent 35px, black 36px);
+    mask: radial-gradient(circle 35px at center top, transparent 0, transparent 35px, black 36px);
+    ion-tab-bar {
+      --background: white;
+      border-top: 1px solid #ddd;
+      box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+      ion-tab-button {
+        color: gray;
+        &.active {
+          color: $primary-color;
+        }
+      }
+      ion-tab-button.add-button {
+        ion-tab-bar {
+          --background: white;
+          border-top: 1px solid #ddd;
+            /* Masque avec trou circulaire au centre */
+        // -webkit-mask: radial-gradient(circle 30px at center top, transparent 0, transparent 30px, black 31px);
+        // mask: radial-gradient(circle 30px at center top, transparent 0, transparent 30px, black 31px);
+          ion-tab-button {
+            color: gray;
+            &.tab-selected {
+              color: $primary-color;
+            }
+          }
+          .div-add-button {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            background: white;
+            border-top: 1px solid #ccc;
+          }
+      
+          .add ion-icon.add-icon {
+            font-size: 28px;
+          }
+        }
+      }
+    }
+  }

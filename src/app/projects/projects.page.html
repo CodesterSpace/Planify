@@ -1,0 +1,199 @@
+<ion-content class="ion-padding" [fullscreen]="true">
+  <div class="espace"></div>
+  <div class="go-back" id="get-back">
+    <ion-button fill="clear" (click)="goHome()">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+  </div>
+  <!-- Profil -->
+  <div class="profile-card ion-text-center">
+    <img class="profile-image" src="assets/img/profile.jpg" alt="Profile Photo">
+    <h2 class="name">Richard A. Bachmann</h2>
+    <p class="title">UI/UX Designer</p>
+    <div class="stats">
+      <div>
+        <h3>75k</h3>
+        <p>Followers</p>
+      </div>
+      <div>
+        <h3>16k</h3>
+        <p>Followings</p>
+      </div>
+      <div>
+        <h3>600</h3>
+        <p>Projects</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Folders -->
+  <div class="folder-container">
+    <div class="folder-title">
+      <ion-item lines="none">
+        <ion-label class="titre"><strong>Folders</strong></ion-label>
+        <ion-button fill="clear" size="small">Voir Tout</ion-button>
+      </ion-item>
+    </div>
+
+    <div class="folders">
+      @if (folders.length > 0) {
+        @for (folder of folders; track folder.f_id) {
+        <ion-card class="folder-card">
+          <ion-item lines="none">
+            <ion-icon name="folder-outline" slot="start"></ion-icon>
+            <div class="folder-info">
+              <ion-label>
+                <h3>{{ folder?.f_title }}</h3>
+                <p>{{ folder?.createdAt | date:'dd/MM/yy HH:mm'  }}</p>
+              </ion-label>
+              <!-- <div class="avatars">
+                <ion-avatar>
+                  <img src="assets/img/team1.jpg" />
+                </ion-avatar>
+                <ion-avatar>
+                  <img src="assets/img/team1.jpg" />
+                </ion-avatar>
+              </div> -->
+            </div>
+          </ion-item>
+        </ion-card>
+        }
+      } @else {
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Aucun projet</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>Ajoutez un projet pour commencer.</ion-card-content>
+        </ion-card>
+      }
+
+      <!-- <ion-card class="folder-card">
+        <ion-item lines="none">
+          <ion-icon name="folder-outline" slot="start"></ion-icon>
+          <div class="folder-info">
+            <ion-label>
+              <h3>Dribbble Shots</h3>
+              <p>Created 28 Feb 2022</p>
+            </ion-label>
+            <div class="avatars">
+              <ion-avatar>
+                <img src="assets/img/team2.jpg" />
+              </ion-avatar>
+            </div>
+          </div>
+        </ion-item>
+      </ion-card> -->
+    </div>
+  
+  </div>
+
+  <!-- Mes Projets-->
+  <div class="my-team-container">
+    <ion-item lines="none">
+      <ion-label class="titre"><strong>Mes Projets</strong></ion-label>
+      <ion-button fill="clear" size="small" (click)="UnlimitedProject()">Voir Tout</ion-button>
+    </ion-item>
+
+    @if (projects.length > 0) {
+
+    <ion-list>
+      @for (project of projects; track project.p_id) {
+      <ion-item lines="none">
+        <ion-icon name="briefcase-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>{{ project?.title }}</h3>
+          <p class="{{ project?.status }}">{{ project?.status }}</p>
+        </ion-label>
+        <ion-avatar slot="end">
+          <img src="assets/img/team1.jpg">
+        </ion-avatar>
+      </ion-item>
+      }
+      <!-- <ion-item lines="none">
+        <ion-icon name="fast-food-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>Food Project</h3>
+          <p>Completed</p>
+        </ion-label>
+        <ion-avatar slot="end">
+          <img src="assets/img/team2.jpg">
+        </ion-avatar>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-icon name="book-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>E-Book Project</h3>
+          <p>Project in Progress</p>
+        </ion-label>
+        <ion-avatar slot="end">
+          <img src="assets/img/team3.jpg">
+        </ion-avatar>
+      </ion-item> -->
+    </ion-list>
+
+  } @else {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Aucun projet</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>Ajoutez un projet pour commencer.</ion-card-content>
+    </ion-card>
+  }
+  </div>
+
+  <!-- My Team -->
+  <div class="my-team-container">
+    <ion-item lines="none">
+      <ion-label class="titre"><strong>Projects En Collaborations</strong></ion-label>
+      <ion-button fill="clear" size="small" (click)="UnlimitedProject()">Voir Tout</ion-button>
+    </ion-item>
+
+    @if (t_projects.length > 0) {
+
+    <ion-list>
+      @for (t_project of t_projects; track t_project.p_id) {
+      <ion-item lines="none">
+        <ion-icon name="briefcase-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>{{ t_project?.title }}</h3>
+          <p class="{{ t_project?.status }}">{{ t_project?.status }}</p>
+        </ion-label>
+        <ion-avatar slot="end">
+          <img src="assets/img/team1.jpg">
+        </ion-avatar>
+      </ion-item>
+      }
+      <!-- <ion-item lines="none">
+        <ion-icon name="fast-food-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>Food Project</h3>
+          <p>Completed</p>
+        </ion-label>
+        <ion-avatar slot="end">
+          <img src="assets/img/team2.jpg">
+        </ion-avatar>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-icon name="book-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>E-Book Project</h3>
+          <p>Project in Progress</p>
+        </ion-label>
+        <ion-avatar slot="end">
+          <img src="assets/img/team3.jpg">
+        </ion-avatar>
+      </ion-item> -->
+    </ion-list>
+
+  } @else {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Aucun projet</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>Ajoutez un projet pour commencer.</ion-card-content>
+    </ion-card>
+  }
+  </div>
+</ion-content>

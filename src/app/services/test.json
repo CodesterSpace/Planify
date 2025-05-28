@@ -1,0 +1,86 @@
+{
+  "trainings": [
+    {
+      "id": 1,
+      "nom": "Cardio Training",
+      "duration": "15 Minutes",
+      "level": "Medium",
+      "top": "yes",
+      "trainingImg": "assets/imgs/cardio.png"
+    },
+    {
+      "id": 2,
+      "nom": "Abs Training",
+      "duration": "15 Minutes",
+      "level": "Medium",
+      "top": "yes",
+      "trainingImg": "assets/imgs/abs.png"
+    },
+    {
+      "id": 3,
+      "nom": "Chest Training",
+      "duration": "15 Minutes",
+      "level": "Easy",
+      "top": "yes",
+      "trainingImg": "assets/imgs/chest.png"
+    },
+    {
+      "id": 4,
+      "nom": "Biceps Training",
+      "duration": "15 Minutes",
+      "level": "Easy",
+      "top": "",
+      "trainingImg": "assets/imgs/biceps.png"
+    },
+    {
+      "id": 5,
+      "nom": "Back Training",
+      "duration": "15 Minutes",
+      "level": "Easy",
+      "top": "",
+      "trainingImg": "assets/imgs/back.png"
+    }
+  ],
+  "exercices": [
+    {
+      "id": 1,
+      "nom": "Jumping Jack",
+      "duration": "5",
+      "reps": "",
+      "trainingId": 1,
+      "exerciceImg": "assets/imgs/biceps.png"
+    },
+    {
+      "id": 2,
+      "nom": "Push Ups",
+      "duration": "",
+      "reps": "15",
+      "trainingId": 2,
+      "exerciceImg": "assets/imgs/biceps.png"
+    },
+    {
+      "id": 3,
+      "nom": "Squats",
+      "duration": "",
+      "reps": "20",
+      "trainingId": 3,
+      "exerciceImg": "assets/imgs/biceps.png"
+    },
+    {
+      "id": 4,
+      "nom": "Squats",
+      "duration": "",
+      "reps": "20",
+      "trainingId": 4,
+      "exerciceImg": "assets/imgs/biceps.png"
+    },
+    {
+      "id": 5,
+      "nom": "Squats",
+      "duration": "",
+      "reps": "20",
+      "trainingId": 5,
+      "exerciceImg": "assets/imgs/biceps.png"
+    }
+  ]
+}

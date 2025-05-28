@@ -1,0 +1,137 @@
+// Couleurs principales
+$primary-color:  #145494;
+$secondary-color: #e8f0fe;
+$text-color: #333;
+$light-gray: #f7f7f7;
+
+ion-content {
+    --background: #f2f6fd;
+    background: #f2f6fd;
+    .h2{
+        color: $primary-color;
+      }
+}
+.task-detail {
+    .important-badge {
+      margin: 1rem 0;
+      border-radius: 12px;
+      padding: 5px 12px;
+      font-size: 0.9rem;
+    }
+  
+    .task-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary-color;
+    }
+  
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 1rem 0;
+  
+      .info-label {
+        font-size: 0.75rem;
+        color: gray;
+        margin: 0;
+      }
+  
+      .info-text {
+        margin: 0;
+        font-weight: 500;
+        color: black;
+      }
+  
+      .spacer {
+        flex-grow: 1;
+      }
+  
+      .calendar-icon {
+        font-size: 24px;
+        color: var(--ion-color-medium);
+      }
+    }
+  
+    .description-text {
+      color: #888;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+  
+    .team-members {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+  
+      ion-avatar:first-child {
+        margin-left: 15px;
+      }
+      ion-avatar {
+        width: 40px;
+        height: 40px;
+        margin-left: -5px;
+        margin-right: -5px;
+      }
+  
+      .add-member {
+        background: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .progress-circle {
+        margin-left: auto;
+        text-align: center;
+        font-size: 0.8rem;
+        position: relative;
+  
+        ion-progress-bar {
+          --progress-background: #eee;
+          --progress-bar-background: var(--ion-color-tertiary);
+          height: 8px;
+          width: 50px;
+          border-radius: 4px;
+          margin-bottom: 4px;
+        }
+  
+        span {
+          font-weight: bold;
+          color: var(--ion-color-tertiary);
+        }
+      }
+    }
+  
+    ion-list {
+      background: transparent;
+      ion-item {
+        --background: #fff;
+        color: black;
+        --border-radius: 12px;
+        border-radius: 12px;
+        margin-top: 0.6rem;
+        margin-bottom: 0;
+        padding: 0;
+        // margin-bottom: 0.6rem;
+        // padding: 10px 15px;
+      }
+    }
+
+    ion-icon.rotated {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+      }
+      
+      .task-detail {
+        padding: 10px 16px;
+        background: #f1f1f1;
+        border-radius: 8px;
+        margin: 0 16px 12px;
+        font-size: 0.9rem;
+        color: #444;
+      }
+      
+  }
+  

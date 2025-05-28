@@ -1,0 +1,129 @@
+<ion-content class="login-screen">
+  <div class="background-blobs">
+    <!-- You can add SVG or divs styled as blobs -->
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+    <div class="blob blob4"></div>
+  </div>
+
+  <div class="espace"></div>
+  <div class="go-back" (click)="goHome()">
+    <ion-button fill="clear">
+      <ion-icon name="home-outline"></ion-icon>
+      <!-- <img src="assets/ionicons/arrow-back.svg" alt=""> -->
+    </ion-button>
+  </div>
+
+  <div class="content">
+    <h1>Welcome Back!</h1>
+    <p>Enter personal details to you<br>employee account</p>
+  </div>
+
+  <div class="footer-buttons">
+    <div class="buttons">
+        <ion-button fill="clear" class="sign-in" (click)="openSignIn()">Sign in</ion-button>
+        <ion-button fill="clear" class="sign-up" (click)="openSignUp()">Sign up</ion-button>
+    </div>
+  </div>
+
+  <ion-modal #signupModal [initialBreakpoint]="0.85" [breakpoints]="[0.85]">
+    <ng-template>
+      <ion-content class="modal">
+        <div class="container">
+          <h2>Get Started</h2>
+          <form>
+            <ion-item lines="none">
+              <ion-input label="Full Name" labelPlacement="stacked" [(ngModel)]="name" (ionBlur)="verifyName()" type="text" placeholder="Enter Full Name"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="nameError"><small>{{ nameError }}</small></ion-text>
+            
+            <ion-item lines="none">
+              <ion-input label="Email" labelPlacement="stacked" autocomplete="false" [(ngModel)]="s_email" (ionBlur)="verifyEmail('s_email')" type="email" placeholder="Enter Email"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="s_emailError"><small>{{ s_emailError }}</small></ion-text>
+            
+            <ion-item lines="none">
+              <ion-input label="Numero" labelPlacement="stacked"[(ngModel)]="numero" type="number" placeholder="Enter Numero"></ion-input>
+            </ion-item>
+            
+            <ion-item lines="none">
+              <ion-input label="Password" labelPlacement="stacked" [(ngModel)]="s_password" (ionBlur)="verifyPass('s_password')" type="password" placeholder="Enter Password">
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+              </ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="s_passError"><small>{{ s_passError }}</small></ion-text>
+            
+            <ion-item lines="none">
+              <ion-input label="Password" labelPlacement="stacked" [(ngModel)]="confpassword" (ionBlur)="verifyConfPass()" type="password" placeholder="Confirme Password">
+                <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+              </ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="confpassError"><small>{{ confpassError }}</small></ion-text>
+      
+            <ion-item lines="none">
+              <ion-checkbox slot="start" value="agree"></ion-checkbox>
+              <ion-label>I agree to the term of use</ion-label>
+            </ion-item>
+            <!-- <ion-text color="danger" *ngIf="f['agree'].touched && f['agree'].invalid">
+              <small>You must agree to continue</small>
+            </ion-text> -->
+      
+            <ion-button expand="block" class="signup-button" (click)="register('email', 'password')">Sign up</ion-button>
+          </form>
+
+          <div class="social-login-text">Ou S'inscrire avec </div>
+      
+          <div class="social-login">
+            <!-- <ion-icon name="logo-facebook"></ion-icon>
+            <ion-icon name="logo-twitter"></ion-icon> -->
+            <ion-icon name="logo-google" (click)="signupModal.dismiss()" (click)="loginWithGoogle()"></ion-icon>
+            <ion-icon name="logo-apple"></ion-icon>
+          </div>
+      
+          <div class="bottom-text">
+            Already have an account ? <span (click)="signupModal.dismiss()" (click)="openSignIn()" (click)="reset()">Sign in</span>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal #signinModal [initialBreakpoint]="0.75" [breakpoints]="[0.75]">
+    <ng-template>
+      <ion-content class="modal">
+        <div class="container">
+          <h2>Welcome Back</h2>
+      
+          <form>
+            <ion-item lines="none">
+              <ion-input label="Email" labelPlacement="stacked" [(ngModel)]="email" (ionBlur)="verifyEmail('email')" type="email" placeholder="Enter Email"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="emailError"><small>{{ emailError }}</small></ion-text>
+  
+            <ion-item lines="none">
+              <ion-input label="Password" labelPlacement="stacked" [(ngModel)]="password" (ionBlur)="verifyPass('password')" type="password" placeholder="Enter Password"></ion-input>
+            </ion-item>
+            <ion-text color="danger" *ngIf="passError"><small>{{ passError }}</small></ion-text><br>
+
+            <ion-text color="danger" *ngIf="errorMessage"><small>{{ errorMessage }}</small></ion-text><br>
+            <ion-text color="success" *ngIf="errorMessage"><small (click)="openSignUp()">Clique ici pour cree un compte</small></ion-text>
+            <ion-button expand="block" class="signup-button" (click)="login('email', 'password')">Sign in</ion-button>
+          </form>
+      
+          <div class="social-login">
+            <!-- <ion-icon name="logo-facebook"></ion-icon>
+            <ion-icon name="logo-twitter"></ion-icon> -->
+            <ion-icon name="logo-google" (click)="signinModal.dismiss()" (click)="loginWithGoogle()"></ion-icon>
+            <ion-icon name="logo-apple"></ion-icon>
+          </div>
+      
+          <div class="bottom-text">
+            Dont have an account ? <span (click)="signinModal.dismiss()" (click)="openSignUp()">Sign up</span>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

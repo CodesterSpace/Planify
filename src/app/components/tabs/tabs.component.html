@@ -1,0 +1,33 @@
+<ion-fab slot="fixed" class="custom-fab">
+  <ion-fab-button color="primary" (click)="addProject()">
+    <ion-icon name="add-circle-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>  
+
+<ion-footer class="custom-footer">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" href="/tabs/tab1" class="active">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Accueil</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="goToProjects()">
+      <ion-icon name="list-outline"></ion-icon>
+      <ion-label>Projets</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button disabled>
+      <ion-icon></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="payment" href="/tabs/tab3">
+      <ion-icon name="card-outline"></ion-icon>
+      <ion-label>Payment</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="goToProfile()">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Profile</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar> 
+</ion-footer>

@@ -1,0 +1,7 @@
+{
+  "name": "Planify",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

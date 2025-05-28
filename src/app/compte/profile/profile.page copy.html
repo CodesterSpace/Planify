@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">{{userData?.name}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="dashboard-content">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Compte & Profil</ion-card-title>
+    </ion-card-header>
+
+    <ion-segment value="profil" class="segment-tab">
+      <ion-segment-button value="profil">
+        <ion-label>Profil</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="compte">
+        <ion-label>Compte</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="notifications">
+        <ion-label>Notifications</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="avatar-section">
+      <ion-avatar>
+        <img src="assets/imgs/avatar1.png" alt="avatar">
+      </ion-avatar>
+
+      <div class="file-upload">
+        <input type="file" id="file" hidden>
+        <label for="file" class="custom-file">Choisir un fichier</label>
+      </div>
+
+      <ion-button expand="block" color="warning">Télécharger</ion-button>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Nom et Prenom</ion-label>
+      <ion-input type="texte" [(ngModel)]="name" [value]="userData?.name" clearInput="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="number" [(ngModel)]="numero" [value]="userData?.numero" justify="space-between" label="Votre Numero" placeholder="Votre Numero de Tel" clearInput="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Masquer le numéro de téléphone</ion-label>
+      <ion-select interface="popover" placeholder="N/A" clearInput="true">
+        <ion-select-option value=""></ion-select-option>
+        <ion-select-option value="oui">Oui</ion-select-option>
+        <ion-select-option value="non">Non</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Livraison offerte</ion-label>
+      <ion-select interface="popover" placeholder="Veuillez selectionner un" clearInput="true">
+        <ion-select-option value=""></ion-select-option>
+        <ion-select-option value="oui">Oui</ion-select-option>
+        <ion-select-option value="non">Non</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label position="stacked">Détails de livraison</ion-label>
+      <ion-textarea rows="6" placeholder="Saisir ici..." clearInput="true"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" color="warning" class="save-btn" (click)="updateUser(userData?.userid)">Enregistrer</ion-button>
+  </ion-card>
+
+</ion-content>

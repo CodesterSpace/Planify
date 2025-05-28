@@ -1,0 +1,186 @@
+<ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar 
+      [style.--background]="project?.mainImage ? 'url(' + project?.mainImage + ') no-repeat center center/cover' : ''">
+      <ion-buttons slot="start">
+        <ion-thumbnail class="menu">
+          <ion-back-button mode="md" defaultHref="/home"></ion-back-button>
+        </ion-thumbnail>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="p-details">
+    <ion-list lines="none">
+      <ion-item lines="none">
+        <ion-label>
+          {{project?.title}}
+          <p class="user-name">
+            {{project?.ownerId}}
+            <ion-chip>
+              Référence du projet: {{project?.p_id}}
+            </ion-chip>
+          </p>
+        </ion-label>
+      </ion-item>
+    
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img [src]="project?.mainImage">
+        </ion-thumbnail>
+        <ion-label class="company">
+          {{project?.title}}
+          <p>
+            <img class="img-icon" src="assets/icons/pin.png">
+            <ion-text color="medium">
+              {{project?.location}}
+            </ion-text>
+            <ion-chip color="light" *ngIf="project?.budget">
+              {{ project?.budget }} FCFA
+            </ion-chip>
+          </p>
+        </ion-label>
+        <ion-text slot="end">
+          {{project?.startDate | date:'dd/MM/yy HH:mm'}}
+        </ion-text>
+      </ion-item>
+  
+    </ion-list>
+  </div>
+
+
+  <ion-row>
+    <ion-segment [value]="segment_value" (ionChange)="changeSegment($event)" mode="ios">
+      <ion-segment-button value="description">
+        <ion-label>Description</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="steps">
+        <ion-label>Etapes</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-row>
+
+  @if (segment_value == 'description') {
+    <ion-row class="ion-margin-bottom desc ion-text-center">
+      <ion-col size="12">
+        <ion-label class="label-desc">Description</ion-label>
+      </ion-col>
+
+      @if (project?.description) {
+        <ul>
+            <li>
+              <ion-text color="medium">{{project?.description}}</ion-text>
+            </li>
+        </ul>
+      }
+    </ion-row>
+    <ion-row class="ion-margin-bottom desc ion-text-center">
+      <ion-col size="12">
+        <ion-label class="label-desc">Détails</ion-label>
+      </ion-col>
+
+      <ion-col size="6">
+        <ul>
+          <li><ion-text color="medium"><strong>Catégorie :</strong> {{ project?.category }}</ion-text></li>
+        </ul>
+      </ion-col>
+      <ion-col size="6">
+        <ul>
+          <li><ion-text color="medium"><strong>Statut :</strong> {{ project?.status }}</ion-text></li>
+        </ul>
+      </ion-col>
+      <ion-col size="6">
+        <ul>
+          <li><ion-text color="medium"><strong>Priorité :</strong> {{ project?.priority }}</ion-text></li>
+        </ul>
+      </ion-col>
+      <ion-col size="6">
+        <ul>
+          <li><ion-text color="medium"><strong>Date de fin :</strong> {{ project?.endDate | date:'dd/MM/yy HH:mm' }}</ion-text></li>
+        </ul>
+      </ion-col>
+      <ion-col size="12">
+        <ul>
+          <li><ion-text color="medium"><strong>Client :</strong> {{ project?.clientId }}</ion-text></li>
+        </ul>
+      </ion-col>
+
+      <!-- <ul>
+        <li><ion-text color="medium"><strong>Catégorie :</strong> {{ project?.category }}</ion-text></li>
+        <li><ion-text color="medium"><strong>Statut :</strong> {{ project?.status }}</ion-text></li>
+        <li><ion-text color="medium"><strong>Priorité :</strong> {{ project?.priority }}</ion-text></li>
+        <li><ion-text color="medium"><strong>Date de fin :</strong> {{ project?.endDate | date }}</ion-text></li>
+        <li><ion-text color="medium"><strong>Client :</strong> {{ project?.clientId }}</ion-text></li>
+      </ul> -->
+    </ion-row>
+  }
+
+  @if (segment_value == 'steps') {
+    <ion-row class="ion-margin-bottom desc ion-text-center">
+      <ion-col size="12">
+        <ion-label class="label-desc">Etapes</ion-label>
+      </ion-col>
+
+      @if (project?.steps?.length) {
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Étapes du projet</ion-label>
+          </ion-list-header>
+          <ion-card *ngFor="let step of project?.steps">
+            <ion-card-header>
+              <ion-card-title>{{ step.title }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p><strong>Description :</strong> {{ step.description }}</p>
+              <ion-item lines="none">
+                <ion-label><strong>Statut :</strong> {{ step.status }}</ion-label>
+                <ion-item>
+                  <ion-label><strong>Statut :</strong></ion-label>
+                  <ion-select
+                  *ngIf="project?.p_id && step?.s_id"
+                  [value]="step.status"
+                  (ionChange)="updateStepStatusInLocalStorage(project!.p_id, step.s_id!, $event.detail.value)">
+                  <ion-select-option value="">À faire</ion-select-option>
+                  <ion-select-option value="progrés">En cours</ion-select-option>
+                  <ion-select-option value="fini">Terminé</ion-select-option>
+                </ion-select>                
+                </ion-item>                
+              </ion-item>
+              <p><strong>Date limite :</strong> {{ step.dueDate | date:'dd/MM/yy HH:mm' }}</p>
+              <p><strong>Assigné à :</strong> {{ step.assigneeId }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-list>
+      } @else {
+        <ion-text color="medium">Aucune étape définie pour ce projet.</ion-text>
+      }
+    </ion-row>
+  }
+
+
+  <ion-card class="folder-card">
+      <div class="folder-info">
+        <div class="details">
+            <ion-text>Du : {{ project?.startDate | date:'dd/MM/yy HH:mm' }}</ion-text>
+            <ion-text>Au : {{ project?.endDate | date:'dd/MM/yy HH:mm' }}</ion-text>
+        </div>
+        <div class="avatars">
+          <ion-avatar>
+            <img src="assets/img/team1.jpg" />
+          </ion-avatar>
+          <ion-avatar>
+            <img src="assets/img/team1.jpg" />
+          </ion-avatar>
+        </div>
+        <div class="client ion-text-center">
+          <ion-text>Client : {{ project?.clientId }}</ion-text>
+        </div>
+      </div>
+  </ion-card>
+
+  <div class="del-button ion-text-center">
+    <ion-button color="danger" (click)="deleteProjectById(project!.p_id)">Supprimer</ion-button>
+  </div>
+
+</ion-content>

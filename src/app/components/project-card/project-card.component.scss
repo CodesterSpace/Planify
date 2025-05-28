@@ -1,0 +1,123 @@
+$primary-color:  #145494;
+$progress-bg: #d0e3ff;
+$card-bg: #eef5ff;
+$subtitle-color: #6c757d;
+$title-color: #0b2545;
+
+:host {
+  display: block;
+
+  .project-card {
+    box-sizing: border-box;
+    margin: 5px; /* Ajustez selon vos préférences */
+    background: linear-gradient(135deg, #3d7094, #2b7bd6);
+    color: white;
+    border-radius: 16px;
+    padding: 16px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 100%; /* S'étend dans sa colonne */
+    min-height: 197px;
+    .card-header {
+      padding: 0;
+    }  
+    ion-card-header {
+      display: contents;
+    }  
+  
+    .card-top-row {
+      order: 1;
+    }
+    .card-content {
+      order: 2;
+    }  
+    
+    .card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .card-content {
+      display: flex;
+      align-items: center;
+      // gap: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .card-icon {
+      min-width: 40px;
+      max-width: 40px;
+      font-size: 32px;
+      color: white;
+      // left: 10%;
+    }
+    
+    .card-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .card-subtitle {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+    
+    .card-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 14px;
+      margin-top: 10px;
+      gap: 4px;
+      padding: 0;
+      ion-progress-bar {
+        height: 6px;
+        border-radius: 8px;
+        margin-top: 6px;
+        margin-bottom: 4px;
+        width: 100%;
+        color: #0d2c59;
+        --color: #0d2c59;
+        --background: #d0e3ff;
+        background: #d0e3ff;
+      } 
+      .progress-percent {
+        font-size: 12px;
+        text-align: right;
+        width: 100%; /* Nécessaire pour que text-align fonctionne */
+      }
+    }  
+    
+    .card-menu {
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+
+
+  .first {
+    box-sizing: border-box;
+    margin: 5px; /* Ajustez selon vos préférences */
+    background: linear-gradient(135deg, #0a3d62, #1e5799);
+    color: white;
+    border-radius: 16px;
+    padding: 16px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 100%; /* S'étend dans sa colonne */
+    min-height: 197px;
+    .card-icon {
+      color: white;
+      // left: 10%;
+    }
+    ion-progress-bar {
+      color: linear-gradient(135deg, #0a3d62, #1e5799);
+      --background: #d0e3ff;
+      background: #d0e3ff;
+    } 
+  }
+  
+}

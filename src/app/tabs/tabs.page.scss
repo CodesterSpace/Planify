@@ -1,0 +1,20 @@
+// Couleurs principales
+$primary-color:  #145494;
+$secondary-color: #e8f0fe;
+$text-color: #333;
+$light-gray: #f7f7f7;
+
+// Footer tab bar (si customisé)
+  ion-tab-bar {
+    --background: white;
+    border-top: 1px solid #ddd;
+      /* Masque avec trou circulaire au centre */
+  -webkit-mask: radial-gradient(circle 30px at center top, transparent 0, transparent 30px, black 31px);
+  mask: radial-gradient(circle 30px at center top, transparent 0, transparent 30px, black 31px);
+    ion-tab-button {
+      color: gray;
+      &.tab-selected {
+        color: $primary-color;
+      }
+    }
+  }

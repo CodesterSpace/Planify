@@ -1,0 +1,67 @@
+<ion-content>
+  <div class="log-sign flex items-center justify-center h-screen bg-purple-100">
+    <div class="w-96 bg-purple-100 p-8 rounded-2xl shadow-lg">
+      <h2 class="text-center text-xl font-semibold mb-4">Register in with</h2>
+      
+      <div class="flex gap-4 mb-4">
+        <button class="flex-1 flex items-center justify-center m-2 p-2 border rounded-lg shadow-sm bg-purple-light">
+          <img src="assets/logos/google.svg" class="h-25 mr-10" alt="Google" /> Google
+        </button>
+        <button class="flex-1 flex items-center justify-center m-2 p-2 border rounded-lg shadow-sm bg-purple-light">
+          <img src="assets/logos/apple.svg" class="h-25 mr-10" alt="Apple" /> Apple
+        </button>
+      </div>
+      
+      <div class="text-center text-gray-500 mb-4 border-left-right">ou</div>
+      <ion-item class="m-2 border rounded-lg" lines="none">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-input type="text" placeholder="Full Name" [(ngModel)]="name" clearInput="true"></ion-input>
+      </ion-item>
+
+      <ion-item class="m-2 border rounded-lg" lines="none">
+        <ion-icon name="mail-outline"></ion-icon>
+        <ion-input type="email" placeholder="Email address" [(ngModel)]="email" clearInput="true"></ion-input>
+      </ion-item>
+      
+      <ion-item class="m-2 border rounded-lg" lines="none">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-input id="mdp"
+        placeholder="Votre MDP" 
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password" 
+        clearInput="true"></ion-input>
+        <ion-icon name="eye-off-outline" (click)="passwordToggler()"></ion-icon>
+      </ion-item>
+
+      <ion-item class="m-2 border rounded-lg" lines="none">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+        <ion-input id="confmdp"
+        placeholder="Confirme MDP" 
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="confpassword" 
+        clearInput="true"></ion-input>
+        <ion-icon name="eye-off-outline" (click)="passwordToggler()"></ion-icon>
+      </ion-item>
+            
+      <button class="w-full bg-purple-600 text-white p-2 rounded-lg" (click)="register()">Log In</button>
+
+      <div *ngIf="errorMessage">
+        <p style="color: red">{{ errorMessage }}</p>
+      </div>
+      
+      <div class="text-center text-sm mt-4 flex items-center justify-center">
+        <ion-card-subtitle class="mr-10">
+          Already have an account?
+        </ion-card-subtitle>
+        <ion-card-subtitle class="text-purple-500 cursor-pointer" routerLink="/profile/login">
+          Login
+        </ion-card-subtitle>
+      </div>
+      <div class="text-center text-sm mt-4 flex items-center justify-center">
+        <ion-card-subtitle class="text-purple-500 cursor-pointer" routerLink="/tabs/accueil">
+          Accueil
+        </ion-card-subtitle>
+      </div>
+    </div>
+  </div>
+</ion-content>

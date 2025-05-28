@@ -1,0 +1,66 @@
+<ion-content>
+
+  <div class="espace"></div>
+  <div class="top-bar">
+    <div class="icon">
+      <ion-icon name="apps"></ion-icon>
+    </div>
+    <div class="title">Home</div>
+    <div class="notification">
+      <!-- <div class="notification-bell">
+        <img src="assets/icons/blue-bells.png" alt="">
+      </div>
+      <div class="badge"></div> -->
+    </div>
+  </div>
+
+  <div class="welcome-header">
+    <h2>Salut {{name}}!</h2>
+    <p>Bonne Journée</p>
+  </div>
+
+  <ion-searchbar placeholder="Search"></ion-searchbar>
+
+  <ion-card class="welcome-card">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8">
+          <ion-card-header>
+            <ion-card-title>Bienvenue!</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Planifions vos projets
+          </ion-card-content>
+        </ion-col>
+        <ion-col size="4">
+          <img src="assets/img/task1.png" alt="Illustration" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <div class="ongoing-header">
+    <h3>Projets en cours</h3>
+    <ion-button fill="clear" size="small" (click)="goToProjects()">Voir Tout</ion-button>
+  </div>
+  
+  @if (projects.length > 0) {
+    <div class="project-container">
+      @for (project of projects; track project.p_id) {
+        <app-project-card 
+          [project]="project"
+          [isFirst]="$first">
+        </app-project-card>
+      }
+    </div>
+  } @else {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Aucun projet</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>Ajoutez un projet pour commencer.</ion-card-content>
+    </ion-card>
+  }
+  <div class="padding-bottom"></div>
+  <app-tabs></app-tabs>
+</ion-content>

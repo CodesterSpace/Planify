@@ -1,0 +1,120 @@
+<ion-content>
+  <div class="go-back">
+    <ion-button class="left-button" fill="clear" (click)="goHome()">
+      <img src="assets/ionicons/arrow-back.svg" alt="">
+    </ion-button>
+  
+    <ion-button class="right-button" expand="block" fill="clear" id="edit">
+      <ion-icon slot="start" name="create-outline"></ion-icon>
+      edite
+    </ion-button>
+  </div>
+
+  <div class="top-content">
+    <!-- Profil -->
+    <div class="profile-card ion-text-center">
+      <div class="profile-image">
+        <img src="assets/img/profile.jpg" alt="Profile Photo">
+      </div>
+      <h2 class="name">{{name}}</h2>
+      <!-- <p class="title">{{role}}</p> -->
+      <div class="stats">
+        <div>
+          <h3>{{totalProjets}}</h3>
+          <p>Projets</p>
+        </div>
+        <div>
+          <h3>{{totalProjetsEnCours}}</h3>
+          <p>Projets En Cours</p>
+        </div>
+        <div>
+          <h3>{{totalProjetsFini}}</h3>
+          <p>Projets Terminés</p>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-button">
+      <ion-button expand="block" fill="outline" color="danger" (click)="signout()">
+        <ion-icon slot="start" name="log-out"></ion-icon>
+        Log Out
+      </ion-button>
+    </div>
+    <div class="bottom-button" *ngIf="update">
+      <ion-button expand="block" fill="outline" color="success" *ngIf="update" (click)="openUpdateLink()">
+        Mis à jours
+      </ion-button>   
+    </div>
+  </div>
+
+  <div class="bottom-content">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <p class="label">Official</p>
+          <h2>{{email}}</h2>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <p class="label">Personal</p>
+          <h2>{{p_email}}</h2>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon name="call-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>
+          <p class="label">Numero</p>
+          <h2>(221) {{numero}}</h2>
+        </ion-label>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon name="people-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>{{poste}}</ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+  
+      <!-- <ion-item>
+        <ion-icon name="person-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Darrell Steward</ion-label>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item> -->
+    </ion-list>
+  </div>
+
+  <ion-modal #editModal trigger="edit" [initialBreakpoint]="0.5" [breakpoints]="[0.5, 0.8, 0.85]">
+    <ng-template>
+      <!-- <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="Edit.dismiss()">Fermer</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header> -->
+      <ion-content class="modal">
+        <div class="container">
+          <h2>Get Started</h2>
+          <!-- <ion-button expand="block" (click)="setOpen(true)">Open</ion-button> -->
+          <ion-toast [isOpen]="isToastOpen" message="Modifié avec succes" [duration]="3000" (didDismiss)="setOpen(false)" position="middle"></ion-toast>
+          <ion-item lines="none">
+            <ion-input label="Full Name" labelPlacement="stacked" (ionFocus)="expandModal()" [(ngModel)]="name" type="text" placeholder="Enter Full Name"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input label="Numero" labelPlacement="stacked" (ionFocus)="expandModal()" [(ngModel)]="numero" type="number" placeholder="Enter Numero"></ion-input>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-input label="Email Personnelle" labelPlacement="stacked" (ionFocus)="expandModal()" [(ngModel)]="p_email" type="text" placeholder="Enter Email"></ion-input>
+          </ion-item>
+          <div class="del-button ion-text-center">
+            <ion-button *ngIf="userid" color="danger" (click)="updateUser(userid)" [disabled]="!userid ? 'true' : 'false'">Modifier</ion-button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

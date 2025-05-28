@@ -1,0 +1,113 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>add-project</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<form [formGroup]="projectForm">
+  <ion-list>
+    <!-- Projet Formulaire -->
+    <ion-item>
+      <ion-label position="floating">Titre</ion-label>
+      <ion-input formControlName="title"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Catégorie</ion-label>
+      <ion-input formControlName="category"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Priorité</ion-label>
+      <ion-select formControlName="priority">
+        <ion-select-option value="faible">Basse</ion-select-option>
+        <ion-select-option value="moyen">Moyenne</ion-select-option>
+        <ion-select-option value="important">Haute</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button id="open-modal" expand="block">Open</ion-button>
+    <ion-modal trigger="open-modal">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-item>
+            <ion-label>Date de début</ion-label>
+            <ion-datetime formControlName="startDate" onchange=""></ion-datetime>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Date de fin</ion-label>
+            <ion-datetime formControlName="endDate"></ion-datetime>
+          </ion-item>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-item>
+      <ion-label>Budget</ion-label>
+      <ion-input type="number" formControlName="budget"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>ID Client</ion-label>
+      <ion-input formControlName="clientId"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Lieu</ion-label>
+      <ion-input formControlName="location"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Image</ion-label>
+      <ion-input formControlName="mainImage"></ion-input>
+    </ion-item>
+  </ion-list>
+</form>
+
+<!-- Étapes du Projet -->
+<ion-list>
+  <ion-card *ngFor="let step of steps; let i = index; trackBy: trackByIndex">
+    <ion-card-header>
+      <ion-card-title>Étape {{ i + 1 }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-input [(ngModel)]="step.title" label="Titre" labelPlacement="stacked"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea [(ngModel)]="step.description" label="Description" labelPlacement="stacked"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-select [(ngModel)]="step.status" label="Statut" labelPlacement="stacked">
+          <ion-select-option value="Programmé">Programmé</ion-select-option>
+          <ion-select-option value="En cours">En cours</ion-select-option>
+          <ion-select-option value="Terminé">Terminé</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-datetime [(ngModel)]="step.dueDate" label="Date limite" labelPlacement="stacked"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="step.assigneeId" label="Assigné à (ID)" labelPlacement="stacked"></ion-input>
+      </ion-item>
+      <ion-button color="danger" expand="block" (click)="removeStep(i)">Supprimer</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-list>
+
+<!-- Boutons pour ajouter des étapes et sauvegarder le projet -->
+<ion-button expand="full" (click)="addStep()">Ajouter une étape</ion-button>
+<ion-button expand="full" color="primary" (click)="saveProject()">Enregistrer le projet</ion-button>

@@ -1,0 +1,79 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="outline" shape="round">
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        Edit Task
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding task-detail">
+
+  <ion-badge color="danger" class="important-badge">Important</ion-badge>
+
+  <h1 class="task-title">3D Character Cute Robot</h1>
+
+  <div class="info-row">
+    <ion-avatar>
+      <img src="assets/img/user1.jpg">
+    </ion-avatar>
+    <div>
+      <p class="info-label">Created</p>
+      <p class="info-text">Smith</p>
+    </div>
+    <div class="spacer"></div>
+    <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
+    <div>
+      <p class="info-label">Du</p>
+      <p class="info-text">16 Oct 2023</p>
+    </div>
+    <div>
+      <p class="info-label">Au</p>
+      <p class="info-text">16 Oct 2023</p>
+    </div>
+  </div>
+
+  <h2 class="h2">Description</h2>
+  <p class="description-text">
+    Create a 3d robot character using blender, the style used is simple and cute and uses soft colors.
+  </p>
+
+  <h2 class="h2">Team Member (4)</h2>
+  <div class="team-members">
+    <ion-avatar *ngFor="let member of team">
+      <img [src]="member.avatar">
+    </ion-avatar>
+    <ion-avatar class="add-member">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-avatar>
+    <div class="progress-circle">
+      <ion-progress-bar value="0.65" color="tertiary" type="conical"></ion-progress-bar>
+      <span>65%</span>
+    </div>
+  </div>
+
+  <h2 class="h2">Task Progress</h2>
+  <ion-list class="tasks-list">
+    <ng-container *ngFor="let task of tasks; let i = index">
+      <ion-item lines="none">
+        <ion-checkbox slot="start" [checked]="task.checked"></ion-checkbox>
+        <ion-label>{{ task.title }}</ion-label>
+        <ion-icon
+          slot="end"
+          name="chevron-down-outline"
+          (click)="toggleDetail(i)"
+          [ngClass]="{ rotated: expandedIndex === i }"
+        ></ion-icon>
+      </ion-item>
+      <div class="task-detail" *ngIf="expandedIndex === i">
+        {{ task.details }}
+      </div>
+    </ng-container>
+  </ion-list>  
+
+</ion-content>

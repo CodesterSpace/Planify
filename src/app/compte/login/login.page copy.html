@@ -1,0 +1,89 @@
+<ion-content class="main-content">
+  @if (segment_value == 'login') {
+  <section class="login-section">
+    <div class="register-in-login">
+      <h2>Hello, Welcome!</h2>
+      <p>Pas encore de compte?</p>
+      <ion-segment [value]="segment_value" (ionChange)="changeSegment($event)" mode="ios">
+        <ion-segment-button value="register" fill="outline" shape="round" size="small">
+          Creer un compte
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  
+    <div class="login-content">
+      <h2>Se connecter</h2>
+  
+      <ion-item lines="none">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="Username" [(ngModel)]="email" clearInput="true"></ion-input>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input type="password" placeholder="Password" [(ngModel)]="password" clearInput="true"></ion-input>
+      </ion-item>
+  
+      <div *ngIf="errorMessage" style="text-align: center;">
+        <p style="color: red">{{ errorMessage }}</p>
+      </div>
+  
+      <div class="forgot-password">oublié?</div>
+  
+      <ion-button expand="block" class="login-btn" (click)="login()">Se connecter</ion-button>
+  
+      <div class="social-login-text">ou avec reseaux sociaux</div>
+  
+      <div class="social-icons">
+        <ion-icon name="logo-google"></ion-icon>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-github"></ion-icon>
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </div>
+    </div>
+  </section>
+}
+
+  @if (segment_value == 'register') {
+  <section class="register-section">
+    <div class="login-in-register">
+      <h2>Hello, Welcome!</h2>
+      <p>Vous avez un compte?</p>
+      <ion-segment [value]="segment_value" (ionChange)="changeSegment($event)" mode="ios">
+        <ion-segment-button value="login">
+          Se connecter
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  
+    <div class="register-content">
+      <h2>Création</h2>
+  
+      <ion-item lines="none">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="Username" [(ngModel)]="email" clearInput="true"></ion-input>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input type="password" placeholder="Password" [(ngModel)]="password" clearInput="true"></ion-input>
+      </ion-item>
+  
+      <div *ngIf="errorMessage" style="text-align: center;">
+        <p style="color: red">{{ errorMessage }}</p>
+      </div>
+  
+      <ion-button expand="block" class="login-btn" (click)="login()">Creer</ion-button>
+  
+      <div class="social-login-text">or login with social platforms</div>
+  
+      <div class="social-icons">
+        <ion-icon name="logo-google"></ion-icon>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-github"></ion-icon>
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </div>
+    </div>
+  </section>
+}
+</ion-content>

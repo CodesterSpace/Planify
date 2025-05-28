@@ -1,0 +1,130 @@
+<ion-content class="main-content" [fullscreen]="true">
+  @if (segment_value == 'login') {
+  <section class="login-section">
+    <div class="register-in-login">
+      <h2>Page de Connexion!</h2>
+      <p>Vous n'avez pas encore de compte?</p>
+      <ion-button fill="outline" shape="round" size="small" class="register-btn" (click)="changeSegment('register')">Cree un compte</ion-button>
+    </div>
+  
+    <div class="login-content">
+      <h2>Se connecter</h2>
+  
+      <ion-item lines="none">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="Email" [(ngModel)]="email" clearInput="true"></ion-input>
+      </ion-item>
+  
+      <ion-item lines="none">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input type="password" placeholder="Mots de pass" [(ngModel)]="password" clearInput="true"></ion-input>
+      </ion-item>
+  
+      <div *ngIf="errorMessage" class="error-content" (click)="closeError()">
+        <ion-text>
+          <p>{{ errorMessage }}</p>
+          <ion-icon name="close"></ion-icon>
+        </ion-text>        
+      </div>      
+  
+      <div class="forgot-password">
+        <ion-text>
+          <ion-button fill="outline" shape="round" size="small" class="register-btn">Reset Password</ion-button>
+        </ion-text>
+      </div>
+  
+      <ion-button expand="block" class="login-btn" (click)="login()">Se connecter</ion-button>
+  
+      <div class="social-login-text">ou avec reseaux sociaux</div>
+  
+      <div class="social-icons">
+        <ion-icon name="logo-google"></ion-icon>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-github"></ion-icon>
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </div>
+
+      <div class="text-center accueil-link">
+        <ion-card-subtitle [routerLink]="['/tabs/accueil']">
+          Accueil
+        </ion-card-subtitle>
+      </div>
+    </div>
+  </section>
+}
+
+  @if (segment_value == 'register') {
+  <section class="register-section">
+    <div class="login-in-register">
+      <h2>Page d'inscription!</h2>
+      <p>Vous avez déja un compte?</p>
+      <ion-button fill="outline" shape="round" size="small" class="register-btn" (click)="changeSegment('login')">Se Connecter</ion-button>
+    </div>
+  
+    <div class="register-content">
+      <h2>Création de compte</h2>
+  
+      <ion-item lines="none">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input type="text" placeholder="Nom Complet" [(ngModel)]="name" clearInput="true"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="Email" [(ngModel)]="email" clearInput="true"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="call-outline" slot="start"></ion-icon>
+        <ion-input type="number" placeholder="Numero" [(ngModel)]="numero" clearInput="true"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon [name]="showPassword ? 'lock-open-outline' : 'lock-closed-outline'" slot="start"></ion-icon>
+        <ion-input id="mdp"
+        placeholder="Votre MDP" 
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password" 
+        clearInput="true"></ion-input>
+        <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'" (click)="passwordToggler()"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon [name]="showPassword ? 'lock-open-outline' : 'lock-closed-outline'" slot="start"></ion-icon>
+        <ion-input id="confmdp"
+        placeholder="Confirme MDP" 
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="confpassword" 
+        clearInput="true"></ion-input>
+        <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'" (click)="passwordToggler()"></ion-icon>        
+      </ion-item>
+  
+      <div *ngIf="errorMessage" class="error-content" (click)="closeError()">
+        <ion-text>
+          <p>{{ errorMessage }}</p>
+          <ion-icon name="close"></ion-icon>
+        </ion-text>        
+      </div>      
+  
+      <ion-button expand="block" class="login-btn" (click)="register()">Creer</ion-button>
+  
+      <div class="social-login-text">ou avec reseaux sociaux</div>
+  
+      <div class="social-icons">
+        <ion-icon name="logo-google"></ion-icon>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-github"></ion-icon>
+        <ion-icon name="logo-linkedin"></ion-icon>
+      </div>
+
+
+      <div class="text-center accueil-link">
+        <ion-card-subtitle class="text-purple-500 cursor-pointer" [routerLink]="['/tabs/accueil']">
+          Accueil
+        </ion-card-subtitle>
+      </div>
+
+    </div>
+  </section>
+}
+</ion-content>

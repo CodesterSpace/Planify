@@ -1,0 +1,215 @@
+<ion-content class="ion-padding project-detail">
+    <div class="espace"></div>
+    <div class="go-back" (click)="goHome()">
+      <ion-button fill="clear">
+        <img src="assets/ionicons/arrow-back.svg" alt="">
+      </ion-button>
+      <h1 class="project-title">{{project?.title}}</h1>
+    </div>
+
+  <div class="project-head">
+    <ion-row class="ion-text-center">
+      <ion-col size="12">
+        <ion-item lines="none">
+          <ion-text color="medium"><strong>Statut :</strong></ion-text>
+          <ion-select [value]="project?.status" (ionChange)="updateProjectStatus(project!.p_id, $event.detail.value)">
+            <ion-select-option value="planifié">Planifié</ion-select-option>
+            <ion-select-option value="progrés">En cours</ion-select-option>
+            <ion-select-option value="fini">Terminé</ion-select-option>
+            <ion-select-option value="annulé">annulé</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item lines="none">
+          <ion-text color="medium"><strong>Catégorie :</strong> {{ project?.category }}</ion-text>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6">
+        <ion-item lines="none">
+          <ion-text color="medium"><strong>Priorité :</strong> <span class="capitalize {{ project?.priority }}">{{ formattedPriority }}</span></ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    
+        <!-- Actions -->
+    <div class="dossiers-buttons">
+      <div class="dossier-button" id="edit-dossiers-{{project?.p_id}}">
+        <ion-button shape="round" color="success"><ion-icon name="create-outline"></ion-icon></ion-button>
+      </div>
+      <div class="dossier-button" *ngFor="let dossier of mesDossiers; let isFirst = first">
+        <ion-button disabled shape="round" fill="outline">{{ dossier?.f_title }}</ion-button><ion-icon slot="end" name="trash-outline"></ion-icon>
+      </div>
+
+      <ion-modal #DossierModal trigger="edit-dossiers-{{project?.p_id}}" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+        <ng-template>
+          <ion-content class="ion-padding">
+            <!-- dossier-modal -->
+            <div class="dossier-modal">
+              <ion-list>
+                <ion-item lines="none" *ngFor="let dossier of folders; let isFirst = first">
+                  <ion-icon class="dark" name="folder" slot="start"></ion-icon>
+                  <ion-label>
+                    <h3>{{ dossier?.f_title }}</h3>
+                  </ion-label>
+                  <ion-icon *ngIf="dossier.existe === 'non'" slot="end" color="success" name="add-outline" (click)="addToFolder(dossier.f_id, project!.p_id)"></ion-icon>
+                  <ion-icon *ngIf="dossier.existe === 'oui'" slot="end" color="danger" name="trash-outline" (click)="RemoveFromFolder(dossier.f_id, project!.p_id)"></ion-icon>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </div>
+  </div>
+
+  <div class="info-row">
+    <div class="profile-image">
+      <img src="assets/img/profile.jpg">
+    </div>
+    <div>
+      <p class="info-label">Par</p>
+      <p class="info-text">{{ownerUser?.name}}</p>
+    </div>
+    <div class="spacer"></div>
+    <ion-icon name="calendar-outline" class="calendar-icon"></ion-icon>
+    <div>
+      <p class="info-label">Du</p>
+      <p class="info-text">{{project?.startDate | date:'dd/MM/yy'}}</p>
+    </div>
+    <div>
+      <p class="info-label">Au</p>
+      <p class="info-text">{{project?.endDate | date:'dd/MM/yy'}}</p>
+    </div>
+  </div>
+
+  <h2 class="h2">Description</h2>
+  <p class="description-text">
+    {{project?.description}}.
+  </p>
+
+  <h2 class="h2">Équipier ({{ (project?.team?.length || 0)}})</h2>
+  <div class="team-members">
+    <div class="avatar" [ngClass]="{ 'first': isFirst }"  *ngFor="let team of teamWithUsers; let isFirst = first"  id="voir-tm-{{project?.p_id}}-{{team?.t_m_id}}">
+      <div class="profile-image">
+        <img src="assets/img/profile.jpg">
+      </div>
+      <ion-modal #modalTeammate trigger="voir-tm-{{project?.p_id}}-{{team?.t_m_id}}" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]">
+        <ng-template>
+          <ion-content class="ion-padding">
+            <ion-list>
+              <ion-item>
+                <ion-avatar slot="start">
+                  <ion-img src="https://i.pravatar.cc/300?u=b"></ion-img>
+                </ion-avatar>
+                <ion-label>
+                  <h2>{{team.name}}</h2>
+                  <p>{{team.email}}</p>
+                  <p>{{team.role}}</p>
+                </ion-label>
+                <ion-label *ngIf="myuserid == project?.ownerId">
+                  <ion-button *ngIf="team?.t_m_id != project?.ownerId"
+                  (click)="delTeamMate(project?.p_id, project?.team, team?.t_m_id)"
+                  (click)="modalTeammate.dismiss()">Supprimer</ion-button>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </div>
+    <div class="avatar add-member" id="{{project?.p_id}}-AddTeamMate" *ngIf="myuserid == project?.ownerId">
+      <ion-icon name="add-outline"></ion-icon>
+    </div>
+    <div class="progress-circle">
+      <ion-progress-bar value="0.65" color="tertiary" type="conical"></ion-progress-bar>
+      <span>65%</span>
+    </div>
+    <ion-modal #addteammates trigger="{{project?.p_id}}-AddTeamMates" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]"  *ngIf="myuserid == project?.ownerId">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Modal</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="addteammates.dismiss()">Fermer</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <ion-list>
+            <ion-item>
+              <ion-input (click)="addteammates.setCurrentBreakpoint(0.5)" [(ngModel)]="t_m_id" placeholder="id"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input (click)="addteammates.setCurrentBreakpoint(0.5)" [(ngModel)]="role" placeholder="role"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-button (click)="addTeamMate(project!.p_id, project?.team, t_m_id, role)" (click)="addteammates.dismiss()">Ajouter membre</ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <ion-modal #addteammate trigger="{{project?.p_id}}-AddTeamMate" [initialBreakpoint]="0.25" [breakpoints]="[0, 0.25, 0.5, 0.75]"  *ngIf="myuserid == project?.ownerId">
+        <ng-template>
+          <ion-content class="ion-padding">
+            <!-- dossier-modal -->
+            <div class="dossier-modal">
+              <ion-list>
+                <ion-item lines="none" *ngFor="let team of teamWithUsers; let isFirst = first">
+                  <form>
+                    <img src="assets/img/profile.jpg">
+                    <ion-label>
+                      <h3>{{team.name}}</h3>
+                    </ion-label>
+                    <ion-label>
+                      <ion-input formControlName="role" placeholder="role"></ion-input>
+                    </ion-label>
+                    <ion-icon slot="end" color="success" name="add-outline" (click)="addTeamMate(project!.p_id, project?.team, team.t_m_id, role)"></ion-icon>
+                  </form>
+                </ion-item>
+              </ion-list>
+            </div>
+          </ion-content>
+        </ng-template>
+    </ion-modal>
+  </div>
+
+  <h2 class="h2">Step Progress</h2>
+  <ion-list class="step-list">
+    <ng-container *ngFor="let step of project?.steps; let i = index">
+      <ion-item lines="none" (click)="toggleDetail(i)">
+        <ion-checkbox slot="start" [checked]="step.status === 'Terminé' ? 'true' : 'false'" checked disabled></ion-checkbox>
+        <ion-label>{{ step.title }}</ion-label>
+        <ion-icon slot="end" name="chevron-down-outline" [ngClass]="{ rotated: expandedIndex === i }"></ion-icon>
+      </ion-item>
+      <div class="step-detail" *ngIf="expandedIndex === i">
+        <ion-card>
+          <ion-card-content>
+            <p><strong>Description :</strong> {{ step.description }}</p>
+            <ion-label><strong>Statut :</strong> {{ step.status }}</ion-label>
+            <p><strong>Date limite :</strong> {{ step.dueDate | date:'dd/MM/yy HH:mm' }}</p>
+            <ion-item lines="none">
+              <ion-label><strong>Statut :</strong></ion-label>
+                <ion-select
+                *ngIf="project?.p_id && step?.s_id"
+                [value]="step.status"
+                (ionChange)="updateStepStatus(project!.p_id, step.s_id!, $event.detail.value)">
+                <ion-select-option value="Programmé">Programmé</ion-select-option>
+                <ion-select-option value="En cours">En cours</ion-select-option>
+                <ion-select-option value="Terminé">Terminé</ion-select-option>
+              </ion-select>                
+            </ion-item>
+            <p><strong>Assigné à :</strong> {{ step.assigneeId }}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ng-container>
+  </ion-list>
+
+  <div class="del-button ion-text-center" *ngIf="myuserid == project?.ownerId">
+    <ion-button color="danger" (click)="deleteProjectById(project!.p_id)">Supprimer</ion-button>
+  </div>
+
+</ion-content>
