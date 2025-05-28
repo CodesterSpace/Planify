@@ -1,0 +1,1 @@
+import"./chunk-OLRFWS6T.js";var t=[{path:"",loadComponent:()=>import("./chunk-LWWWXAIZ.js").then(o=>o.ComptePage)},{path:"profile",loadComponent:()=>import("./chunk-EIROMQA4.js").then(o=>o.ProfilePage)}];export{t as routes};
